@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Te Amo minha neca!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(to top right, #ffb6c1, #ffe6eb);
+      overflow-x: hidden;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .top-banner {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 2.5rem;
+      font-family: 'Great Vibes', cursive;
+      color: #fff;
+      text-shadow: 2px 2px 5px #00000080;
+      background: rgba(255, 0, 100, 0.6);
+      padding: 15px 0;
+      z-index: 10;
+    }
+
+    .photo-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px;
+      padding: 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .photo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .music-box, .beauty-box, .letter-box {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .beauty-box button, .letter-box button {
+      padding: 6px 10px;
+      background: #fff;
+      color: #d60039;
+      border: 2px solid #d60039;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .beauty-box button:hover, .letter-box button:hover {
+      background: #d60039;
+      color: #fff;
+    }
+
+    .beauty-box .foto-linda {
+      display: none;
+      max-width: 90%;
+      border-radius: 15px;
+      margin-top: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .letter {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      background: #fff0f5;
+      border: 2px solid #d60039;
+      border-radius: 10px;
+      color: #d60039;
+      max-width: 60%;
+      font-size: 1rem;
+      line-height: 1.5;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .music-box h3 {
+      color: #d60039;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .music-box a {
+      margin: 3px 0;
+      padding: 4px 8px;
+      background: #fff;
+      color: #d60039;
+      border: 2px solid #d60039;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .music-box a:hover {
+      background: #d60039;
+      color: #fff;
+    }
+
+    .arrow {
+      font-size: 1.5rem;
+      color: #d60039;
+      background: none;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+      z-index: 3;
+      margin: 10px;
+    }
+
+    .photo-set {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .photo {
+      width: 90vw;
+      max-width: 300px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .photo:hover {
+      transform: scale(1.02);
+    }
+
+    .counters {
+      margin-top: 30px;
+      border-radius: 15px;
+      text-align: center;
+      z-index: 2;
+      padding: 0 20px;
+    }
+
+    .counters h2 {
+      margin: 10px 0;
+      color: #d60039;
+      font-size: 1.5rem;
+    }
+
+    .heart {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 10s linear infinite;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -15px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -15px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-banner">Leo&Bru ❤️</div>
+
+  <div class="photo-wrapper">
+    <div class="photo-container">
+      <div class="photo-set">
+        <button class="arrow" onclick="mudarFoto(-1)">←</button>
+        <img class="photo" id="fotoPrincipal" src="https://i.imgur.com/wWvLnx3.jpeg" alt="Nossa Foto">
+        <button class="arrow" onclick="mudarFoto(1)">→</button>
+      </div>
+
+      <div class="music-box">
+        <h3>Músicas pra lembrar do nosso amor</h3>
+        <a href="https://www.youtube.com/watch?v=szts-5Zs5_8" target="_blank">Música 1</a>
+        <a href="https://youtu.be/8ecn6_fE9EE?si=m8kSB0jz2UUD3Yus" target="_blank">Música 2</a>
+        <a href="https://www.youtube.com/watch?v=SB3LdIEH-QQ" target="_blank">Música 3</a>
+      </div>
+
+      <div class="beauty-box">
+        <button onclick="mostrarFotoLinda()">Clique pra ver a mulher mais bonita do mundo</button>
+        <img class="foto-linda" id="fotoLinda" src="https://i.imgur.com/9FaBjRv.jpeg" alt="A mulher mais bonita do mundo">
+      </div>
+
+      <div class="letter-box">
+        <button onclick="toggleCarta()">Abra uma Cartinha feita com muito amor</button>
+        <div class="letter" id="carta">
+          Não é Fácil expressar apenas com palavras o quanto eu te amo, sinceramente, não sei se já consegui isso. Mas acredito que, por meio de uma carta, eu posso descrever pelo menos 1% do quão grande é meu amor por você. Então saiba sempre que você é exatamente a garota que sempre sonhei em ter ao meu lado, sem tirar nem por, seu companheirismo e amor por mim, me acolhem e me fazem ser uma pessoa muito feliz e realizada, minha vida pode estar um caos, mas sei que o mais importante, vai estar lá, que é você sendo minha namorada. Vou aproveitar esse momento pra deixar mais claro ainda uma coisa que você já sabe, mas que eu não tinha falado da melhor maneira. Lá no começo, quando estávamos apenas começando a conversar, eu tinha um sentimento muito estranho, é díficil explicar, mas no fundo, eu já sabia, alguma coisa dentro de mim já falava desde aquela época, "É ela" e cada vez que o tempo passa, eu tenho ainda mais certeza de que é você. Eu Te amo MUITO, você é a garota dos meus sonhos e tenho certeza que, um dia, vamos nos casar e ter filhos maravilhosos. Te amo meu neném.<br><br>Com Amor,<br>Leo
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="counters">
+    <h2 id="tempoJuntos"></h2>
+    <h2 id="tempoRestante"></h2>
+  </div>
+
+  <script>
+    const fotos = [
+      "https://i.imgur.com/wWvLnx3.jpeg",
+      "https://i.imgur.com/hvD8c4H.jpeg",
+      "https://i.imgur.com/4vZBTzE.jpeg",
+      "https://i.imgur.com/3PYNwHq.jpeg"
+    ];
+    let fotoAtual = 0;
+
+    function mudarFoto(direcao) {
+      fotoAtual = (fotoAtual + direcao + fotos.length) % fotos.length;
+      document.getElementById("fotoPrincipal").src = fotos[fotoAtual];
+    }
+
+    setInterval(() => mudarFoto(1), 4000);
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = '100vh';
+      heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
+    }
+    setInterval(createHeart, 300);
+
+    function atualizarContador() {
+      const inicio = new Date('2024-09-20T00:00:00');
+      const agora = new Date();
+      const umAno = new Date('2025-09-20T00:00:00');
+
+      const diffJuntos = agora - inicio;
+      const diffRestante = umAno - agora;
+
+      const segundosJuntos = Math.floor(diffJuntos / 1000);
+      const diasJ = Math.floor(segundosJuntos / (60 * 60 * 24));
+      const horasJ = Math.floor((segundosJuntos % (60 * 60 * 24)) / 3600);
+      const minutosJ = Math.floor((segundosJuntos % 3600) / 60);
+      const segundosJ = segundosJuntos % 60;
+
+      const segundosRestantes = Math.floor(diffRestante / 1000);
+      const diasR = Math.floor(segundosRestantes / (60 * 60 * 24));
+      const horasR = Math.floor((segundosRestantes % (60 * 60 * 24)) / 3600);
+      const minutosR = Math.floor((segundosRestantes % 3600) / 60);
+      const segundosR = segundosRestantes % 60;
+
+      document.getElementById('tempoJuntos').textContent = `Estamos juntos há ${diasJ}d ${horasJ}h ${minutosJ}m ${segundosJ}s 💕`;
+      document.getElementById('tempoRestante').textContent = `Faltam ${diasR}d ${horasR}h ${minutosR}m ${segundosR}s para nosso primeiro ano juntos! 🎉`;
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+
+    function mostrarFotoLinda() {
+      const foto = document.getElementById('fotoLinda');
+      foto.style.display = (foto.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function toggleCarta() {
+      const carta = document.getElementById('carta');
+      carta.style.display = carta.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>
